@@ -13,17 +13,11 @@
     *(User: Interessant-Button)*
     *(Streamer: Forum-Verweisung, Nächste Frage, Frage löschen)*
 
-    - Impulse
+    - Kommentare
 
-      *Sortierung nach Kommentare absteigend, Zeit absteigend*
+      *Sortierung nach Zeit aufsteigend*
 
-      *(Streamer: Impuls löschen)*
-
-      - Kommentare
-
-        *Sortierung nach Zeit aufsteigend*
-
-        *(Streamer: Kommentar löschen)*
+      *(Streamer: Kommentar löschen)*
 
   - Umfrage
 

@@ -37,7 +37,7 @@
 | ------ | -------------------------------------------------------- | ---- |
 | id     | auto_increment                                           | int  |
 | user   | user.id                                                  | int  |
-| inhalt |                                                          | text |
+| inhalt | (Max. 300 Zeichen)                                       | text |
 | forum  | 0: Nein (Default), 1: Ja                                 | int  |
 | status | 0: Keinen (Default), 1: Aktuelle Frage, 2: Nächste Frage | int  |
 | time   | UNIX Timestamp                                           | int  |
@@ -50,23 +50,15 @@
 | user   | user.id        | int  |
 | frage  | fragen.id      | int  |
 
-### impulse
-
-| Spalte | Beschreibung   | Typ  |
-| ------ | -------------- | ---- |
-| id     | auto_increment | int  |
-| user   | user.id        | int  |
-| frage  | fragen.id      | int  |
-| inhalt |                | text |
-
 ### kommentare
 
-| Spalte | Beschreibung   | Typ  |
-| ------ | -------------- | ---- |
-| id     | auto_increment | int  |
-| user   | user.id        | int  |
-| impuls | impulse.id     | int  |
-| inhalt |                | text |
+| Spalte | Beschreibung         | Typ  |
+| ------ | -------------------- | ---- |
+| id     | auto_increment       | int  |
+| user   | user.id              | int  |
+| typ    | 0: Frage, 1: Umfrage |      |
+| frage  | fragen.id            | int  |
+| inhalt | (Max. 300 Zeichen)   | text |
 
 ### umfrage
 
@@ -90,8 +82,7 @@
 | -------- | ------------------------------------------------------ | ---- |
 | id       | auto_increment                                         | int  |
 | session  | PHP Session ID                                         | text |
-| nickname |                                                        | text |
-| os       |                                                        | text |
+| nickname | (Max. 30 Zeichen)                                      | text |
+| os       | (Max. 30 Zeichen )                                     | text |
 | level    | 0: Anfänger, 1: Nutzer, 2: Fortgeschrittener, 3: Profi | int  |
-| mod      | 0: Nein (Default), 1: Ja                               | int  |
 

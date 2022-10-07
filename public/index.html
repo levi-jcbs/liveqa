@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LiveQA</title>
+    <meta name='viewport' content='width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=no'>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="assets/fonts/open-sans/open-sans.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script type="text/javascript" src="assets/js/main.js"></script>
+  </head>
+  <body>
+
+    <!-- Temporary Site Checkboxes -->
+    <input type="radio" class="pseudo" name="siteradio" id="site_main" checked>
+    <input type="radio" class="pseudo" name="siteradio" id="site_frage_stellen">
+    <input type="radio" class="pseudo" name="siteradio" id="site_nutzereinstellungen">
+    <input type="radio" class="pseudo" name="siteradio" id="site_nutzerinformationen">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="title">
+	<div class="host">LinuxGuides</div>
+	<div class="headline">Q&A Fragerunde rund um Linux</div>
+      </div>
+      <div class="user">
+	<label for="site_nutzerinformationen" class="userinfo">
+	  <div class="level">Normaler Nutzer</div>
+	  <div class="os">openSUSE Tumbleweed, Gnome</div>
+	</label>
+	<label for="site_nutzereinstellungen" class="username">
+	  <div class="nickname">Schaukelstuhl</div>
+	  <div class="status">User</div>
+	</label>
+      </div>
+    </div>
+    
+    <!-- BODY -->    
+    <div class="body site_main">
+      <div class="fragen">
+
+	<div class="titlecontainer">
+	  <div class="title">Fragen</div>
+	  <label for="site_frage_stellen" class="button important">Frage stellen</label>
+	</div>
+
+	<div class="frage aktuell">
+	  <div class="topbar">
+	    <div class="user">Ramdownloader42</div>
+	    <div class="tag">Anfänger</div>
+	    <div class="tag">Ubuntu 22.04</div>
+	    <div class="space"></div>
+	    <div class="interessant">Interessant (35)</div>
+	  </div>
+	  <div class="inhalt">Was haltet ihr von Zorin OS? Ich habe es noch nie ausprobiert...</div>
+
+	  <table class="kommentare">
+	    <tr>
+	      <td>Schaukelstuhl</td>
+	      <td>Ich würde nur Distros verwenden, hinter denen eine Community steht</td>
+	    </tr>
+	    <tr>
+	      <td>Bärmetall</td>
+	      <td>Bin stolzer Benutzer seit 5 einhalb Jahren!</td>
+	    </tr>
+	    <tr class="write">
+	      <td>Schaukelstuhl</td>
+	      <td><input type="text" placeholder="Dein Kommentar..."></td>
+	    </tr>
+	  </table>
+	</div>
+
+	<input type="checkbox" class="pseudo" id="kommentare_42">
+      	<label class="frage" for="kommentare_42">
+	  <div class="topbar">
+	    <div class="user">Hans Dieter Bla</div>
+	    <div class="tag">Profi</div>
+	    <div class="tag">Arch Linux</div>
+	    <div class="tag important">Frage fürs Forum</div>
+	    <div class="space"></div>
+	    <div class="interessant">Interessant (12)</div>
+	  </div>
+	  <div class="inhalt">Wann kommt das nächste Q&A?</div>
+
+	  <table class="kommentare">
+	    <tr>
+	      <td>Schaukelstuhl</td>
+	      <td>Ich würde nur Distros verwenden, hinter denen eine Community steht</td>
+	    </tr>
+	    <tr>
+	      <td>Bärmetall</td>
+	      <td>Bin stolzer Benutzer seit 5 einhalb Jahren!</td>
+	    </tr>
+	    <tr class="write">
+	      <td>Schaukelstuhl</td>
+	      <td><input type="text" placeholder="Dein Kommentar..."></td>
+	    </tr>
+	  </table>	  
+	</label>
+      </div>
+    </div>
+
+    <!-- TEMPORARY SITES -->
+    <div class="body site_frage_stellen">
+      <div>
+	<div class="titlecontainer">
+	  <div class="title">Frage stellen</div>
+	  <label for="site_main" class="button">Hauptseite</label>
+	</div>
+
+	<div class="inputbar secondary firstfocus">
+	  <div>
+	    <div>Nutzername:</div>
+	    <input type="text" placeholder="Nutzername" id="set_username" value="Schaukelstuhl">
+	  </div>
+	  <div>
+	    <div>Erfahrung:</div>
+	    <select id="set_level">
+	      <option value="0">Anfänger</option>
+	      <option value="1" selected>Nutzer</option>
+	      <option value="2">Fortgeschrittener</option>
+	      <option value="3">Profi</option>
+	    </select>
+	  </div>
+	  <div>
+	    <div>Betriebsystem:</div>
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os">
+	  </div>
+	</div>
+	
+	<div>
+	  <div class="inputtitle">Deine Frage:</div>
+	  <input type="text" id="frage">
+	</div>
+	
+	<div><div class="button important">Frage stellen</div></div>
+      </div>
+    </div>
+    
+    <div class="body site_nutzereinstellungen">
+      <div>
+	<div class="titlecontainer">
+	  <div class="title">Nutzer</div>
+	  <label for="site_main" class="button">Hauptseite</label>
+	</div>
+	
+	<div>
+	  <div class="inputtitle">Dein Nutzername:</div>
+	  <input type="text" value="Schaukelstuhl">
+	</div>
+	
+	<div><div class="button important">ändern</div></div>
+
+	<div class="new_section"></div>
+	
+	<div>Diese Seite verzichtet bewusst auf registrierte Nutzerkonten. Falls du dich jedoch mit diesem Nutzer auf einem anderen Gerät anmelden möchtest, nutze die folgende Nutzer ID.</div>
+
+	<div class="inputbar firstfocus">
+	  <div>
+	    <div class="inputtitle">Deine Nutzer ID:</div>
+	    <input type="text" value="Ha92jaAjs1lsa" class="copy hidden" disabled>
+	  </div>
+	  <div class="minwidth">
+	    <div>Status:</div>
+	    <select disabled>
+	      <option value="0" selected>User</option>
+	      <option value="1">Moderator</option>
+	    </select>
+	  </div>
+	</div>
+
+	<div class="new_section"></div>
+
+	<div>Falls du dich auf diesem Gerät mit einem anderen Nutzer anmelden möchtest, trage unten die entsprechende Nutzer ID ein.</div>
+	<div>
+	  <div class="inputtitle">Neue Nutzer ID:</div>
+	  <input type="text" value="">
+	</div>
+	
+	<div><div class="button">anmelden</div></div>
+
+      </div>
+    </div>
+
+    <div class="body site_nutzerinformationen">
+      <div>
+	<div class="titlecontainer">
+	  <div class="title">Deine Informationen</div>
+	  <label for="site_main" class="button">Hauptseite</label>
+	</div>
+	
+	<div class="inputbar">
+	  <div>
+	    <div>Erfahrung:</div>
+	    <select id="set_level">
+	      <option value="0">Anfänger</option>
+	      <option value="1" selected>Nutzer</option>
+	      <option value="2">Fortgeschrittener</option>
+	      <option value="3">Profi</option>
+	    </select>
+	  </div>
+	  <div>
+	    <div>Betriebsystem:</div>
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os">
+	  </div>
+	</div>
+
+	<div>Die Angaben sind optional, können aber in manchen Situationen hilfreich sein.</div>
+	
+	<div><div class="button important">ändern</div></div>
+      </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+      <div>Powered by <a href="https://jcobs.de" target="_blank">J'cobs Softwareentwicklung</a></div>
+    </div>
+    
+  </body>
+</html>

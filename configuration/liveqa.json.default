@@ -1,0 +1,14 @@
+{
+  "look": {
+    "colors": {
+      "accent": "#68ad16"
+    },
+    "font": {
+      "primary": "Open Sans"
+    }
+  },
+  
+  "text": {
+    "headline": "LiveQA"
+  }
+}

@@ -15,32 +15,34 @@
     <input type="radio" class="pseudo" name="siteradio" id="site_frage_stellen">
     <input type="radio" class="pseudo" name="siteradio" id="site_nutzereinstellungen">
     <input type="radio" class="pseudo" name="siteradio" id="site_nutzerinformationen">
+    <input type="radio" class="pseudo" name="siteradio" id="site_einstellungen">
 
     <!-- HEADER -->
     <div class="header">
       <div class="title">
-	<div class="host">LinuxGuides</div>
-	<div class="headline">Q&A Fragerunde rund um Linux</div>
+	<div class="host" id="data_text_host"></div>
+	<div class="headline" id="data_text_headline"></div>
       </div>
       <div class="user">
 	<label for="site_nutzerinformationen" class="userinfo">
-	  <div class="level">Normaler Nutzer</div>
-	  <div class="os">openSUSE Tumbleweed, Gnome</div>
+	  <div class="level" id="data_level"></div>
+	  <div class="os" id="data_os"></div>
 	</label>
 	<label for="site_nutzereinstellungen" class="username">
-	  <div class="nickname">Schaukelstuhl</div>
-	  <div class="status">User</div>
+	  <div class="nickname" id="data_username"></div>
+	  <div class="status" id="data_mod">User</div>
 	</label>
       </div>
     </div>
     
     <!-- BODY -->    
-    <div class="body site_main">
+    <div class="body site_main">	
       <div class="fragen">
 
 	<div class="titlecontainer">
 	  <div class="title">Fragen</div>
-	  <label for="site_frage_stellen" class="button important">Frage stellen</label>
+	  <label for="site_frage_stellen" class="button important _not_mod">Frage stellen</label>
+	  <label for="site_einstellungen" class="button important _mod">Einstellungen</label>
 	</div>
 
 	<div class="frage aktuell">
@@ -110,20 +112,20 @@
 	<div class="inputbar secondary firstfocus">
 	  <div>
 	    <div>Nutzername:</div>
-	    <input type="text" placeholder="Nutzername" id="set_username" value="Schaukelstuhl">
+	    <input type="text" placeholder="Nutzername" id="set_username_frage_stellen" value="">
 	  </div>
 	  <div>
 	    <div>Erfahrung:</div>
-	    <select id="set_level">
-	      <option value="0">Anfänger</option>
-	      <option value="1" selected>Nutzer</option>
-	      <option value="2">Fortgeschrittener</option>
-	      <option value="3">Profi</option>
+	    <select id="set_level_frage_stellen">
+	      <option value="0" id="set_level_0_frage_stellen">Anfänger</option>
+	      <option value="1" id="set_level_1_frage_stellen">Normaler Nutzer</option>
+	      <option value="2" id="set_level_2_frage_stellen">Fortgeschrittener</option>
+	      <option value="3" id="set_level_3_frage_stellen">Profi</option>
 	    </select>
 	  </div>
 	  <div>
 	    <div>Betriebsystem:</div>
-	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os">
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os_frage_stellen">
 	  </div>
 	</div>
 	
@@ -145,7 +147,7 @@
 	
 	<div>
 	  <div class="inputtitle">Dein Nutzername:</div>
-	  <input type="text" value="Schaukelstuhl">
+	  <input type="text" value="" id="set_username_nutzereinstellungen">
 	</div>
 	
 	<div><div class="button important">ändern</div></div>
@@ -157,13 +159,13 @@
 	<div class="inputbar firstfocus">
 	  <div>
 	    <div class="inputtitle">Deine Nutzer ID:</div>
-	    <input type="text" value="Ha92jaAjs1lsa" class="copy hidden" disabled>
+	    <input type="text" value="" class="copy hidden" id="data_session" disabled>
 	  </div>
 	  <div class="minwidth">
 	    <div>Status:</div>
 	    <select disabled>
-	      <option value="0" selected>User</option>
-	      <option value="1">Moderator</option>
+	      <option value="0" id="data_mod_0">User</option>
+	      <option value="1" id="data_mod_1">Moderator</option>
 	    </select>
 	  </div>
 	</div>
@@ -191,22 +193,48 @@
 	<div class="inputbar">
 	  <div>
 	    <div>Erfahrung:</div>
-	    <select id="set_level">
-	      <option value="0">Anfänger</option>
-	      <option value="1" selected>Nutzer</option>
-	      <option value="2">Fortgeschrittener</option>
-	      <option value="3">Profi</option>
+	    <select id="set_level_nutzereinstellungen">
+	      <option value="0" id="set_level_0_nutzereinstellungen">Anfänger</option>
+	      <option value="1" id="set_level_1_nutzereinstellungen">Normaler Nutzer</option>
+	      <option value="2" id="set_level_2_nutzereinstellungen">Fortgeschrittener</option>
+	      <option value="3" id="set_level_3_nutzereinstellungen">Profi</option>
 	    </select>
 	  </div>
 	  <div>
 	    <div>Betriebsystem:</div>
-	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os">
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os_nutzereinstellungen">
 	  </div>
 	</div>
 
 	<div>Die Angaben sind optional, können aber in manchen Situationen hilfreich sein.</div>
 	
 	<div><div class="button important">ändern</div></div>
+      </div>
+    </div>
+
+    <div class="body site_einstellungen _mod">
+      <div>
+	<div class="titlecontainer">
+	  <div class="title">Einstellungen</div>
+	  <label for="site_main" class="button">Hauptseite</label>
+	</div>
+	
+	<div class="inputbar">
+	  <div>
+	    <div class="inputtitle">Aktives Projekt:</div>
+	    <select id="set_project">
+	    </select>
+	  </div>
+	  <div>
+	    <div class="inputtitle">Neues Projekt:</div>
+	    <input type="text" placeholder="Name" id="new_project">
+	  </div>
+	</div>
+
+	<div>Neue Projekte werden sofort auf aktiv gestellt.</div>
+	
+	<div><div class="button important">speichern</div></div>
+
       </div>
     </div>
     

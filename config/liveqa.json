@@ -1,0 +1,31 @@
+{
+  "css": [
+    [ "--var-font-family", "Open Sans" ],
+    [ "--var-color-accent", "#67ad16" ],
+    [ "--var-color-accent-text", "#ffffff" ],
+    [ "--var-color-lighter-1", "rgba(100%, 100%, 100%, 0.1)" ],
+    [ "--var-color-lighter-2", "rgba(100%, 100%, 100%, 0.2)" ],
+    [ "--var-color-darker-1", "rgba(0%, 0%, 0%, 0.1)" ],
+    [ "--var-color-darker-2", "rgba(0%, 0%, 0%, 0.2)" ],
+    [ "--var-color-page", "#1e1e1e" ],
+    [ "--var-color-page-text", "#ffffff" ],
+    [ "--var-color-background", "#ffffff" ],
+    [ "--var-color-background-text", "#000000" ],
+
+    [ "--var-font-weight-light", "300" ],
+    [ "--var-font-weight-medium", "400" ],
+    [ "--var-font-weight-bold", "600" ],
+    
+    [ "--var-font-size-little", "14px" ],
+    [ "--var-font-size-smaller", "16px" ],
+    [ "--var-font-size-medium", "18px" ],
+    [ "--var-font-size-large", "22px" ]
+  ],
+  "text": {
+    "host": "Linux Guides",
+    "headline": "Q&A Fragerunde rund um Linux"
+  },
+  "mods": [
+    "mpf58l6ee1m6modt707onjho5t0rul5g"
+  ]
+}

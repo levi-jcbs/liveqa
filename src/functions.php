@@ -60,25 +60,47 @@ function getrows($query_out){
 
 function handle_user(){
     global $_LIVEQA_CONFIG;
-    
-    session_start(["sid_length" => 32]);
-    $_LIVEQA_USER["session"]=session_id();
-    session_write_close();
 
+    /* 1. Valide Session ID auslesen, falls nicht möglich, die invalide Session ID aus den Cookies löschen.
+     * 2. Überprüfen, ob Session ID einem existierenden User zugeordnet werden kann. (Überspringen, falls keine Session ID ausgelesen werden konnte)
+     * 3. Wenn Session ID nicht zugeordnet werden kann, neue generieren und User erstellen. 
+     */
+    
+    # Retrieving Session ID. If failed, clear Session Cookies.
+    if(session_start(["sid_length" => 32])){
+        $_LIVEQA_USER["session"]=session_id();
+        session_write_close();
+    }else{
+        $setcookie=setcookie(session_name(), null, -1, '/');
+    }
+    
     $user_exists=false;
     $i=0;
     while (!$user_exists and $i < 2){
-        $out = query("SELECT id, name, os, level FROM user WHERE session='".$_LIVEQA_USER["session"]."';");
-        while ($row = getrows($out)) {
-            $user_exists=true;
-            $_LIVEQA_USER["id"]=$row[0];
-            $_LIVEQA_USER["name"]=$row[1];
-            $_LIVEQA_USER["os"]=$row[2];
-            $_LIVEQA_USER["level"]=$row[3];
+        # Dont look for "empty" session, when Session ID not retreived. 
+        if($_LIVEQA_USER["session"] != ""){
+            $out = query("SELECT id, name, os, level FROM user WHERE session='".escape($_LIVEQA_USER["session"])."';");
+            while ($row = getrows($out)) {
+                $user_exists=true;
+                $_LIVEQA_USER["id"]=$row[0];
+                $_LIVEQA_USER["name"]=$row[1];
+                $_LIVEQA_USER["os"]=$row[2];
+                $_LIVEQA_USER["level"]=$row[3];
+            }
         }
-    
+        
         if(!$user_exists){
-            query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".$_LIVEQA_USER["session"]."';");
+            # Generate new Session ID to not accept custom session IDs from users.
+            if(session_start(["sid_length" => 32])){
+                session_regenerate_id(true);
+                $_LIVEQA_USER["session"]=session_id();
+                session_write_close();
+                
+                query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".escape($_LIVEQA_USER["session"])."';");
+            }else{
+                send_error("Session Start failed.");
+                break;
+            }
         }
     
         $i++;
@@ -141,6 +163,11 @@ function send_event($event, $data){
     echo "event: $event\n";
     echo "data: ".json_encode($data)."\n\n";
     flush();
+}
+
+function escape($string){
+    global $mysql_connection;
+    return mysqli_real_escape_string($mysql_connection, $string);
 }
 
 ?>

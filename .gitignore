@@ -1,3 +1,2 @@
 /mysql/*
 !/mysql/init
-/configuration/liveqa.json

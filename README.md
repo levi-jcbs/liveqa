@@ -136,3 +136,9 @@
 ## Datenbank
 
 Siehe `/config/liveqa.sql`.
+
+Importieren über: 
+
+````bash
+podman exec -i $CONTAINER /bin/sh -c 'echo "source /app/config/liveqa.sql" | mysql -u root --password='
+````

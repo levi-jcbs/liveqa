@@ -75,6 +75,7 @@
             "os": "",
             "forum": 0,
             "interessant": 0,
+            "user_interessant": 0,
             "inhalt": "",
             "status": 0
         ],
@@ -129,9 +130,6 @@
 |      |       |        |           |             |       |         |
 |      | data  | new    | kommentar |             | frage | :x:     |
 | :x:  | data  | remove | kommentar |             | :x:   |         |
-|      |       |        |           |             |       |         |
-|      |       |        |           |             |       |         |
-|      |       |        |           |             |       |         |
 
 ## Datenbank
 

@@ -1,3 +1,25 @@
+@media (prefers-color-scheme: light) {
+    :root {
+	--var-color-final-accent: var(--var-color-light-accent);
+	--var-color-final-accent-text: var(--var-color-light-accent-text);
+	--var-color-final-background: var(--var-color-light-background);
+	--var-color-final-background-text: var(--var-color-light-background-text);
+	--var-color-final-focus-1: var(--var-color-light-focus-1);
+	--var-color-final-focus-2: var(--var-color-light-focus-2);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+	--var-color-final-accent: var(--var-color-dark-accent);
+	--var-color-final-accent-text: var(--var-color-dark-accent-text);
+	--var-color-final-background: var(--var-color-dark-background);
+	--var-color-final-background-text: var(--var-color-dark-background-text);
+	--var-color-final-focus-1: var(--var-color-dark-focus-1);
+	--var-color-final-focus-2: var(--var-color-dark-focus-2);
+    }
+}
+
 body, html {
     height: 100%;
     margin: 0;
@@ -9,8 +31,8 @@ body {
     font-family: var(--var-font-family);
     font-size: var(--var-font-size-medium);
     font-weight: var(--var-font-weight-medium);
-    background-color: var(--var-color-background);
-    color: var(--var-color-background-text);
+    background-color: var(--var-color-final-background);
+    color: var(--var-color-final-background-text);
 }
 
 * {
@@ -68,8 +90,8 @@ body {
     align-items: center;
     gap: 25px 50px;
     padding: 20px 25px;
-    background-color: var(--var-color-page);
-    color: var(--var-color-page-text);
+    background-color: var(--var-color-final-focus-1);
+    color: var(--var-color-final-background-text);
 }
 
 .header .title {
@@ -85,8 +107,8 @@ body {
 
 .header .title .host {
     position: relative;
-    background-color: var(--var-color-accent);
-    color: var(--var-color-accent-text);
+    background-color: var(--var-color-final-accent);
+    color: var(--var-color-final-accent-text);
     padding: 7px 15px;
     border-radius: 5px;
 }
@@ -114,7 +136,7 @@ body {
 }
 
 .header .user > *:hover{
-    background-color: var(--var-color-lighter-1);
+    background-color: var(--var-color-final-focus-1);
 }
 
 /* SEITENMECHANISMUS */
@@ -155,6 +177,10 @@ body {
     margin: 20px 0px;
 }
 
+.body .p {
+    font-weight: var(--var-font-weight-light);
+}
+
 .body .titlecontainer {
     display: flex;
     align-items: center;
@@ -168,33 +194,38 @@ body {
 .body .button {
     display: inline-block;
     font-size: var(--var-font-size-large);
-    background-color: var(--var-color-darker-1);
-    color: var(--var-color-background-text);
+    background-color: var(--var-color-final-focus-1);
+    color: var(--var-color-final-background-text);
     padding: 7px 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 200ms;
+}
+
+.body .button:not(.important):hover {
+    background-color: var(--var-color-final-focus-2);
 }
 
 .body .button.important {
-    background-color: var(--var-color-accent);
-    color: var(--var-color-accent-text);
+    background-color: var(--var-color-final-accent);
+    color: var(--var-color-final-accent-text);
 }
 
 .body .frage {
     display: block;
-    background-color: var(--var-color-darker-1);
+    background-color: var(--var-color-final-focus-1);
     transition: background-color 200ms;
     padding: 15px 30px;
     border-radius: 5px;
 }
 
 .body .frage:hover:not(.aktuell) {
-    background-color: var(--var-color-darker-2);
+    background-color: var(--var-color-final-focus-2);
     cursor: pointer;
 }
 
 .body .frage.aktuell {
-    border-left: var(--var-color-accent) solid 5px;
+    border-left: var(--var-color-final-accent) solid 5px;
     padding-left: 25px;
 }
 
@@ -211,15 +242,15 @@ body {
 }
 
 .body .frage .topbar .tag {
-    background-color: var(--var-color-background);
+    background-color: var(--var-color-final-background);
     margin-right: 10px;
     padding: 3px 6px;
     border-radius: 3px;
 }
 
 .body .frage .topbar .tag.important {
-    background-color: var(--var-color-accent);
-    color: var(--var-color-accent-text);    
+    background-color: var(--var-color-final-accent);
+    color: var(--var-color-final-accent-text);    
 }
 
 .body .frage .topbar .interessant {
@@ -268,8 +299,8 @@ body {
 .body .frage .kommentare input[type=text] {
     font-size: var(--var-font-size-smaller);
     padding: 5px 10px;
-    background-color: var(--var-color-background);
-    color: var(--var-color-background-text);
+    background-color: var(--var-color-final-background);
+    color: var(--var-color-final-background-text);
 }
 
 input[type=text], select {
@@ -279,8 +310,8 @@ input[type=text], select {
     border-radius: 5px;
     margin: 0px;
     padding: 7px 15px;
-    background-color: var(--var-color-darker-1);
-    color: var(--var-color-background-text);
+    background-color: var(--var-color-final-focus-1);
+    color: var(--var-color-final-background-text);
     font-family: var(--var-font-family); 
     font-weight: var(--var-font-weight-medium);
     font-size: var(--var-font-size-medium);
@@ -345,7 +376,7 @@ input[type=text]:disabled:not(.copy), select:disabled {
 
 .footer a {
     text-decoration: none;
-    color: var(--var-color-background-text);
+    color: var(--var-color-final-background-text);
     font-weight: var(--var-font-weight-medium);
 }
 

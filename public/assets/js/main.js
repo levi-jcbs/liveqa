@@ -1,6 +1,9 @@
-var dataEventSource = new EventSource("data/");
 
 window.onload = function(){
+    let cookie_policy=check_cookie_policy();
+
+    var dataEventSource = new EventSource("data/?cookies_allowed="+cookie_policy);
+
     dataEventSource.addEventListener("liveqa_error", (event) => {receive_error_event(event);});
     dataEventSource.addEventListener("sys", (event) => {receive_sys_event(event);});
 }
@@ -42,7 +45,7 @@ function receive_sys_event(event){
 
 	if(chunk["type"] == "user"){
 	    if(exists(chunk["unset"]) && chunk["unset"] == 1){
-		document.querySelectorAll('._interaction').forEach(e => e.remove());		
+		disable_user_interactions();
 	    }
 	    
 	    if(exists(chunk["username"])){
@@ -119,4 +122,16 @@ function exists(i){
     }else{
 	return true;
     }
+}
+
+function disable_user_interactions(){
+    document.querySelectorAll('._interaction').forEach(e => e.style.display="none");
+}
+
+function check_cookie_policy(){
+    if(!navigator.cookieEnabled){
+	disable_user_interactions();
+	return "0";
+    }
+    return "1";
 }

@@ -8,10 +8,6 @@ open_mysql_connection();
 $_LIVEQA_USER=handle_user();
 $_LIVEQA_PROJECT=handle_project();
 
-if($_LIVEQA_USER === false){
-    send_error("Userinit fehlgeschlagen. Keine Userinteraktionen möglich.");
-}
-
 #                      #
 # SENDING INITIAL DATA #
 #                      #
@@ -55,7 +51,11 @@ send_event("sys", $event_data);
 
 while (!connection_aborted()){
     sleep(10);
+    send_event("test", array());
 }
+
+error_log("Closing Connection...");
+mysqli_close($mysql_connection);
 
 ?>
     

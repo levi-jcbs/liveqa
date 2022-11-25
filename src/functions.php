@@ -60,15 +60,22 @@ function getrows($query_out){
 
 function handle_user(){
     global $_LIVEQA_CONFIG;
-
+    global $_GET;
+    
+    if($_GET["cookies_allowed"] == "0"){
+        error_log("Cookies disallowed by browser");
+        return false;
+    }
+    
     /* 1. Valide Session ID auslesen, falls nicht möglich, die invalide Session ID aus den Cookies löschen.
      * 2. Überprüfen, ob Session ID einem existierenden User zugeordnet werden kann.
      * 3. Wenn Session ID nicht zugeordnet werden kann, User erstellen.
      */
 
-    # Session ID empfangen oder generieren - falls fehlgeschlagen Session ID Cookie löschen
+    # 1
     if(session_start(["sid_length" => 32])){
         $_LIVEQA_USER["session"]=session_id();
+        session_write_close();
     }else{
         setcookie(session_name(), null, -1, '/');
         error_log("Invalid Session Cookie detected - deleting");
@@ -78,6 +85,7 @@ function handle_user(){
     $user_exists=false;
     $i=0;
     while (!$user_exists and $i < 2){
+        # 2
         $out = query("SELECT id, name, os, level FROM user WHERE session='".escape($_LIVEQA_USER["session"])."';");
         while ($row = getrows($out)) {
             $user_exists=true;
@@ -86,14 +94,15 @@ function handle_user(){
             $_LIVEQA_USER["os"]=$row[2];
             $_LIVEQA_USER["level"]=$row[3];
         }
-        
+
+        # 3
         if(!$user_exists){
             query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".escape($_LIVEQA_USER["session"])."';");
         }
     
         $i++;
     }
-
+    
     if(!$user_exists){
         error_log("Failed creating user. Aborting.");
         return false;

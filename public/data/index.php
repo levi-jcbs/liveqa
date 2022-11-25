@@ -9,7 +9,7 @@ $_LIVEQA_USER=handle_user();
 $_LIVEQA_PROJECT=handle_project();
 
 if($_LIVEQA_USER === false){
-    send_error("Cookies sind deaktiviert. Keine Userinteraktionen möglich.");
+    send_error("Userinit fehlgeschlagen. Keine Userinteraktionen möglich.");
 }
 
 #                      #

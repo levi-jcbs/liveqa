@@ -41,6 +41,10 @@ function receive_sys_event(event){
 	}
 
 	if(chunk["type"] == "user"){
+	    if(exists(chunk["unset"]) && chunk["unset"] == 1){
+		document.querySelectorAll('._interaction').forEach(e => e.remove());		
+	    }
+	    
 	    if(exists(chunk["username"])){
 		document.getElementById("data_username").innerText=chunk["username"];
 		document.getElementById("set_username_nutzereinstellungen").value=chunk["username"];

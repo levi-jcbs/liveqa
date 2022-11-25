@@ -8,6 +8,10 @@ open_mysql_connection();
 $_LIVEQA_USER=handle_user();
 $_LIVEQA_PROJECT=handle_project();
 
+if($_LIVEQA_USER === false){
+    send_error("Cookies sind deaktiviert. Keine Userinteraktionen möglich.");
+}
+
 #                      #
 # SENDING INITIAL DATA #
 #                      #
@@ -37,12 +41,15 @@ while ($row = getrows($out)) {
 
 $chunk++;
 $event_data["data"][$chunk]["type"]="user";
-$event_data["data"][$chunk]["username"]=$_LIVEQA_USER["name"];
-$event_data["data"][$chunk]["session"]=$_LIVEQA_USER["session"];
-$event_data["data"][$chunk]["level"]=$_LIVEQA_USER["level"];
-$event_data["data"][$chunk]["os"]=$_LIVEQA_USER["os"];
-$event_data["data"][$chunk]["mod"]=$_LIVEQA_USER["mod"];
-
+if($_LIVEQA_USER !== false){
+    $event_data["data"][$chunk]["username"]=$_LIVEQA_USER["name"];
+    $event_data["data"][$chunk]["session"]=$_LIVEQA_USER["session"];
+    $event_data["data"][$chunk]["level"]=$_LIVEQA_USER["level"];
+    $event_data["data"][$chunk]["os"]=$_LIVEQA_USER["os"];
+    $event_data["data"][$chunk]["mod"]=$_LIVEQA_USER["mod"];
+}else{
+    $event_data["data"][$chunk]["unset"]=1;
+}
 
 send_event("sys", $event_data);
 

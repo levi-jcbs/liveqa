@@ -22,7 +22,7 @@ function open_mysql_connection(){
     }
 
     if(!$result){
-        send_error("Connection to mysql failed!");
+        error_log("Connection to mysql failed!");
         return false;
     }else{
         return true;
@@ -41,7 +41,7 @@ function query($query){
     $out = mysqli_query($mysql_connection, $query);
 
     if($out === false){
-        send_error(mysqli_error($mysql_connection));
+        error_log(mysqli_error($mysql_connection));
     }
     
     return $out;
@@ -51,7 +51,7 @@ function getrows($query_out){
     global $mysql_connection;
     
     if($query_out === false){
-        send_error(mysqli_error($mysql_connection));
+        error_log(mysqli_error($mysql_connection));
         return array();
     }else{
         return mysqli_fetch_row($query_out);
@@ -63,7 +63,7 @@ function handle_user(){
 
     /* 1. Valide Session ID auslesen, falls nicht möglich, die invalide Session ID aus den Cookies löschen.
      * 2. Überprüfen, ob Session ID einem existierenden User zugeordnet werden kann. (Überspringen, falls keine Session ID ausgelesen werden konnte)
-     * 3. Wenn Session ID nicht zugeordnet werden kann, neue generieren und User erstellen. 
+     * 3. Wenn Session ID nicht zugeordnet werden kann, neue generieren. Und User erstellen falls der Cookie nicht rejected wurde. 
      */
     
     # Retrieving Session ID. If failed, clear Session Cookies.
@@ -95,11 +95,16 @@ function handle_user(){
                 session_regenerate_id(true);
                 $_LIVEQA_USER["session"]=session_id();
                 session_write_close();
-                
-                query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".escape($_LIVEQA_USER["session"])."';");
+
+                if(isset($_COOKIE[session_name()])){
+                    query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".escape($_LIVEQA_USER["session"])."';");
+                }else{
+                    error_log("Cookie set failed");
+                    return false;
+                }
             }else{
-                send_error("Session Start failed.");
-                break;
+                error_log("Session Start failed.");
+                return false;
             }
         }
     
@@ -107,8 +112,8 @@ function handle_user(){
     }
 
     if(!$user_exists){
-        send_error("Failed creating user. Aborting.");
-        exit();
+        error_log("Failed creating user. Aborting.");
+        return false;
     }
 
     if(in_array($_LIVEQA_USER["session"], $_LIVEQA_CONFIG["mods"])){

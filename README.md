@@ -53,7 +53,8 @@
             "session": "",
             "level": "",
             "os": "",
-            "mod": 0
+            "mod": 0,
+            "unset": 0
         ]
     ]
 }

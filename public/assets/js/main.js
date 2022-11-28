@@ -30,16 +30,25 @@ function receive_sys_event(event){
 	}
 
 	if(chunk["type"] == "project"){
-	    if(exists(chunk["id"]) && exists(chunk["name"]) && exists(chunk["active"])){
-		var selectOption = document.createElement("option");
-		selectOption.setAttribute("id", chunk["id"]);
+	    if(exists(chunk["id"]) && exists(chunk["name"])){
+		let selectOption = document.createElement("option");
+		selectOption.setAttribute("id", "set_active_project_"+chunk["id"]);
 		selectOption.innerText=chunk["id"]+": "+chunk["name"];
+
+		document.getElementById("set_project").appendChild(selectOption);
+	    }
+
+	    if(exists(chunk["id"]) && exists(chunk["active"])){
+		let selectOption = document.getElementById("set_active_project_"+chunk["id"]); 
 		if(chunk["active"] == 1){
 		    selectOption.selected=true;
 		    selectOption.innerText+=" (aktiv)";
 		}
-
-		document.getElementById("set_project").appendChild(selectOption);
+		if(chunk["active"] == 0){
+		    selectOption.selected=false;
+		    selectOption.innerText=removeLastWord(selectOption.innerText);
+		    console.log(removeLastWord(selectOption.innerText));
+		}
 	    }
 	}
 
@@ -134,4 +143,24 @@ function check_cookie_policy(){
 	return "0";
     }
     return "1";
+}
+
+function api_request(component){
+    if(component == "settings"){
+	let project_name = document.getElementById("settings_new_project").value;
+	if(project_name != ""){
+	    fetch( '/api/?group=sys&action=new&type=project&content='+encodeURIComponent(project_name) );
+	    document.getElementById("settings_new_project").value="";
+	}
+    }
+}
+
+function removeLastWord(str) {
+    const lastIndexOfSpace = str.lastIndexOf(' ');
+    
+    if (lastIndexOfSpace === -1) {
+	return str;
+    }
+    
+    return str.substring(0, lastIndexOfSpace);
 }

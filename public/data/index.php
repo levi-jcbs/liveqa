@@ -49,10 +49,34 @@ if($_LIVEQA_USER !== false){
 
 send_event("sys", $event_data);
 
-while (!connection_aborted()){
-    sleep(10);
-    send_event("test", array());
+$listen_socket=socket_create(AF_INET, SOCK_STREAM, 0);
+
+if($_LIVEQA_USER === false){
+    $bind_port_user=-1;
+}else{
+    $bind_port_user=$_LIVEQA_USER["id"];
 }
+
+$port=set_bind_port($bind_port_user);
+
+if(socket_bind($listen_socket, "127.0.0.1", $port)
+   and socket_listen($listen_socket, 10)) {
+    
+    while (!connection_aborted()){
+        $communication_socket=socket_accept($listen_socket);
+        
+        $message=trim(socket_read($communication_socket, 5000,  PHP_NORMAL_READ));
+        socket_write($communication_socket, "OK\n", 16);
+        
+        $message_parsed=json_decode($message, true);
+        
+        send_event($message_parsed["event"], array("data" =>  [ $message_parsed["data"] ]));
+    }
+
+}
+
+socket_close($listen_socket);
+open_bind_port($port);
 
 error_log("Closing Connection...");
 mysqli_close($mysql_connection);

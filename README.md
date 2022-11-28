@@ -114,23 +114,21 @@
 | ---- | ----- | ------ | --------- | ----------- | ----- | ------- |
 | :x:  | sys   | new    | project   |             |       | :x:     |
 | :x:  | sys   | set    | project   | active      | :x:   |         |
+| :x:  | data  | remove | frage     |             | :x:   |         |
+| :x:  | data  | new    | frage     | forum       | :x:   |         |
+| :x:  | data  | remove | frage     | forum       | :x:   |         |
+| :x:  | data  | set    | frage     | current     | :x:   |         |
+| :x:  | data  | set    | frage     | next        | :x:   |         |
+| :x:  | data  | remove | kommentar |             | :x:   |         |
 |      |       |        |           |             |       |         |
 |      | sys   | set    | user      | name        |       | :x:     |
 |      | sys   | set    | user      | session     |       | :x:     |
 |      | sys   | set    | user      | level       |       | :x:     |
 |      | sys   | set    | user      | os          |       | :x:     |
-|      |       |        |           |             |       |         |
 |      | data  | new    | frage     |             |       | :x:     |
-| :x:  | data  | remove | frage     |             | :x:   |         |
 |      | data  | new    | frage     | interessant | :x:   |         |
 |      | data  | remove | frage     | interessant | :x:   |         |
-| :x:  | data  | new    | frage     | forum       | :x:   |         |
-| :x:  | data  | remove | frage     | forum       | :x:   |         |
-| :x:  | data  | set    | frage     | current     | :x:   |         |
-| :x:  | data  | set    | frage     | next        | :x:   |         |
-|      |       |        |           |             |       |         |
 |      | data  | new    | kommentar |             | frage | :x:     |
-| :x:  | data  | remove | kommentar |             | :x:   |         |
 
 ## Datenbank
 

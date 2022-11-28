@@ -86,7 +86,7 @@ function handle_user(){
     $i=0;
     while (!$user_exists and $i < 2){
         # 2
-        $out = query("SELECT id, name, os, level FROM user WHERE session='".escape($_LIVEQA_USER["session"])."';");
+        $out = query("SELECT id, name, os, level FROM user WHERE session='".mysql_escape($_LIVEQA_USER["session"])."';");
         while ($row = getrows($out)) {
             $user_exists=true;
             $_LIVEQA_USER["id"]=$row[0];
@@ -97,7 +97,7 @@ function handle_user(){
 
         # 3
         if(!$user_exists){
-            query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".escape($_LIVEQA_USER["session"])."';");
+            query("INSERT INTO user SET name='Anonymous', os='Linux', level='1', session='".mysql_escape($_LIVEQA_USER["session"])."';");
         }
     
         $i++;
@@ -147,6 +147,7 @@ function import_config(){
 }
 
 function set_eventstream(){
+    set_time_limit(0);
     ob_end_flush();
     ignore_user_abort(true);
     
@@ -162,9 +163,73 @@ function send_event($event, $data){
     flush();
 }
 
-function escape($string){
+function mysql_escape($string){
     global $mysql_connection;
     return mysqli_real_escape_string($mysql_connection, $string);
+}
+
+function html_escape($string){
+    return htmlspecialchars($string);
+}
+
+function content_or_id_missing(){
+    global $_RETURN;
+
+    $_RETURN["status"]="error";
+    $_RETURN["error"]="Content or ID missing.";
+}
+
+function set_bind_port($user_id){
+    global $mysql_connection;
+    
+    $port=25000;
+    $port_free=false;
+    while (!$port_free and $port < 26000){
+        $port_free=true;
+        $out = query("SELECT id FROM sockets WHERE port=$port;");
+        while ($row = getrows($out)) {
+            $port_free=false;
+        }
+        
+        if($port_free){
+            query("INSERT INTO sockets SET user=$user_id, port=$port;");
+            return $port;
+        }
+        
+        $port++;
+    }
+
+    return false;
+}
+
+function open_bind_port($port){
+    query("DELETE FROM sockets WHERE port=$port;");
+    return true;
+}
+
+function deploy_chunk($event, $user){
+    $user_specification="";
+    if(is_numeric($user) and $user > -1){
+        $user_specification="WHERE user=$user";
+    }
+    
+    $out = query("SELECT id, port FROM sockets $user_specification;");
+    while ($row = getrows($out)) {
+        $port=$row[1];
+        $socket=socket_create(AF_INET, SOCK_STREAM, 0);
+        if(socket_connect($socket, "127.0.0.1", $port)){
+            $message=json_encode($event);
+            socket_write($socket, $message."\n", strlen($message)+2);
+
+            # Wait for answer, to close socket.
+            socket_read($socket, 1024, PHP_NORMAL_READ);
+        }else{
+            open_bind_port($port);
+        }
+        socket_close($socket);
+    }
+    
+    return true;
 }
 
 ?>

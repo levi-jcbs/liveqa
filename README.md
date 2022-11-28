@@ -128,7 +128,7 @@
 |      | data  | new    | frage     |             |       | :x:     |
 |      | data  | new    | frage     | interessant | :x:   |         |
 |      | data  | remove | frage     | interessant | :x:   |         |
-|      | data  | new    | kommentar |             | frage | **:x:** |
+|      | data  | new    | kommentar |             | frage | :x:     |
 
 ## Datenbank
 

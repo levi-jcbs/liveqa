@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * API - BACKEND
+ */
+
 include("../../src/functions.php");
 
 $_LIVEQA_CONFIG=import_config();

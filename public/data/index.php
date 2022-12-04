@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * (DATA-) EVENT STREAM - CLIENT
+ */
+
+
 include("../../src/functions.php");
 
 set_eventstream();

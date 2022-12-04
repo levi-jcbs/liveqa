@@ -23,6 +23,20 @@
 
     *Nur eine Umfrage zur Zeit*
 
+## Dependencies
+
+- Webserver
+- PHP8
+- PHP8-mysql
+- PHP8-sockets
+- mariadb
+
+## Dinge, über die man sich Gedanken machen sollte
+
+- Name
+- Maximale MySQL Verbindungen
+- Vollständige, also wirklich **vollständige** Funktionalität der automatischen Schließung ungenutzer Sockets
+
 ## Events
 
 ### sys

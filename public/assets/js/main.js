@@ -1,4 +1,3 @@
-
 window.onload = function(){
     let cookie_policy=check_cookie_policy();
 

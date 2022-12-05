@@ -208,11 +208,32 @@ function open_bind_port($port){
 }
 
 function deploy_chunk($event, $user){
-    $user_specification="";
+    # $user:
+    # 0+ Ein spezieller User mit ID
+    # -1 Alle User
+    # -2 Mods
+    # -3 Selbst
+    
+    global $_LIVEQA_CONFIG;
+    global $_LIVEQA_USER;
+    
     if(is_numeric($user) and $user > -1){
         $user_specification="WHERE user=$user";
+    }elseif($user == -2){
+        $user_specification="WHERE 0=1";
+        foreach($_LIVEQA_CONFIG["mods"] AS $mod_session_id){
+            $out = query("SELECT id FROM user WHERE session='$mod_session_id';");
+            while ($row = getrows($out)) {
+                $mod_user_id=$row[0];
+                $user_specification.=" OR user=$mod_user_id";
+            }
+        }
+    }elseif($user == -3){
+        $user_specification="WHERE user=".$_LIVEQA_USER["id"];
+    }else{
+        $user_specification="";
     }
-    
+
     $out = query("SELECT id, port FROM sockets $user_specification;");
     while ($row = getrows($out)) {
         $port=$row[1];
@@ -230,6 +251,22 @@ function deploy_chunk($event, $user){
     }
     
     return true;
+}
+
+function unactivate_all_projects(){
+    $out = query("SELECT id FROM projects WHERE active=1;");
+    while ($row = getrows($out)){
+        $unactivate_project_id=$row[0];
+        query("UPDATE projects SET active=0 WHERE id=$unactivate_project_id;");
+        deploy_chunk(array(
+            "event" => "sys",
+            "data" => [
+                "type" => "project",
+                "id" => $unactivate_project_id,
+                "active" => 0
+            ]
+        ), -2);
+    }
 }
 
 ?>

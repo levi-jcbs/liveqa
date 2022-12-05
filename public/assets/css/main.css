@@ -263,7 +263,7 @@ body {
     display: none;
 }
 
-.body input[type=checkbox]:checked + label .kommentare {
+.body input[type=checkbox]:checked + label.frage:not(.aktuell) .kommentare {
     display: block;
 }
 

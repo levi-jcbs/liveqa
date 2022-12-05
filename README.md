@@ -1,6 +1,6 @@
 # LiveQA
 
-*LiveQA* ist ein kleine Communityseite für Q&A Livestreams.
+*LiveQA* ist ein kleines Communityprojekt für Q&A Livestreams.
 
 ## Seitenaufbau
 
@@ -63,7 +63,7 @@
         ],
         [
             "type": "user",
-            "username": "",
+            "name": "",
             "session": "",
             "level": "",
             "os": "",

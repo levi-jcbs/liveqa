@@ -37,7 +37,7 @@
     
     <!-- BODY -->    
     <div class="body site_main">	
-      <div class="fragen">
+      <div class="fragen" id="fragen">
 
 	<div class="titlecontainer">
 	  <div class="title">Fragen</div>
@@ -45,17 +45,19 @@
 	  <label for="site_einstellungen" class="button important _mod _interaction">Einstellungen</label>
 	</div>
 
-	<div class="frage aktuell">
-	  <div class="topbar">
-	    <div class="user">Ramdownloader42</div>
-	    <div class="tag">Anfänger</div>
-	    <div class="tag">Ubuntu 22.04</div>
+	<input type="checkbox" class="pseudo" id="togglefrage_42">
+      	<label class="frage aktuell" id="frage_42" for="togglefrage_42">
+	  <div class="topbar" id="frage_42_topbar">
+	    <div class="user" id="frage_42_topbar_username">Anonymous</div>
+	    <div class="tag" id="frage_42_topbar_level">Normaler Nutzer</div>
+	    <div class="tag" id="frage_42_topbar_os">Linux</div>
+	    <div class="tag important" id="frage_42_topbar_forum">Frage fürs Forum</div>
 	    <div class="space"></div>
-	    <div class="interessant">Interessant (35)</div>
+	    <div class="interessant" id="frage_42_topbar_interessant">Interessant (12)</div>
 	  </div>
-	  <div class="inhalt">Was haltet ihr von Zorin OS? Ich habe es noch nie ausprobiert...</div>
+	  <div class="inhalt" id="frage_42_inhalt">Wann kommt das nächste Q&A?</div>
 
-	  <table class="kommentare">
+	  <table class="kommentare" id="frage_42_kommentare">
 	    <tr>
 	      <td>Schaukelstuhl</td>
 	      <td>Ich würde nur Distros verwenden, hinter denen eine Community steht</td>
@@ -65,39 +67,13 @@
 	      <td>Bin stolzer Benutzer seit 5 einhalb Jahren!</td>
 	    </tr>
 	    <tr class="write _interaction">
-	      <td>Schaukelstuhl</td>
-	      <td><input type="text" placeholder="Dein Kommentar..."></td>
-	    </tr>
-	  </table>
-	</div>
-
-	<input type="checkbox" class="pseudo" id="kommentare_42">
-      	<label class="frage" for="kommentare_42">
-	  <div class="topbar">
-	    <div class="user">Hans Dieter Bla</div>
-	    <div class="tag">Profi</div>
-	    <div class="tag">Arch Linux</div>
-	    <div class="tag important">Frage fürs Forum</div>
-	    <div class="space"></div>
-	    <div class="interessant">Interessant (12)</div>
-	  </div>
-	  <div class="inhalt">Wann kommt das nächste Q&A?</div>
-
-	  <table class="kommentare">
-	    <tr>
-	      <td>Schaukelstuhl</td>
-	      <td>Ich würde nur Distros verwenden, hinter denen eine Community steht</td>
-	    </tr>
-	    <tr>
-	      <td>Bärmetall</td>
-	      <td>Bin stolzer Benutzer seit 5 einhalb Jahren!</td>
-	    </tr>
-	    <tr class="write _interaction">
-	      <td>Schaukelstuhl</td>
+	      <td id="frage_42_kommentare_username">Schaukelstuhl</td>
 	      <td><input type="text" placeholder="Dein Kommentar..."></td>
 	    </tr>
 	  </table>	  
 	</label>
+	
+	
       </div>
     </div>
 
@@ -112,29 +88,29 @@
 	<div class="inputbar secondary firstfocus">
 	  <div>
 	    <div>Nutzername:</div>
-	    <input type="text" placeholder="Nutzername" id="set_username_frage_stellen" value="">
+	    <input type="text" placeholder="Nutzername" id="frage_stellen_set_user_name" value="">
 	  </div>
 	  <div>
 	    <div>Erfahrung:</div>
-	    <select id="set_level_frage_stellen">
-	      <option value="0" id="set_level_0_frage_stellen">Anfänger</option>
-	      <option value="1" id="set_level_1_frage_stellen">Normaler Nutzer</option>
-	      <option value="2" id="set_level_2_frage_stellen">Fortgeschrittener</option>
-	      <option value="3" id="set_level_3_frage_stellen">Profi</option>
+	    <select id="frage_stellen_set_user_level">
+	      <option value="0" id="frage_stellen_set_user_level_option_0">Anfänger</option>
+	      <option value="1" id="frage_stellen_set_user_level_option_1">Normaler Nutzer</option>
+	      <option value="2" id="frage_stellen_set_user_level_option_2">Fortgeschrittener</option>
+	      <option value="3" id="frage_stellen_set_user_level_option_3">Profi</option>
 	    </select>
 	  </div>
 	  <div>
 	    <div>Betriebsystem:</div>
-	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os_frage_stellen">
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="frage_stellen_set_user_os">
 	  </div>
 	</div>
 	
 	<div>
 	  <div class="inputtitle">Deine Frage:</div>
-	  <input type="text" id="frage">
+	  <input type="text" id="frage_stellen_new_frage">
 	</div>
 	
-	<div><div class="button important _interaction">Frage stellen</div></div>
+	<div><div class="button important" onclick="api_request(['frage_stellen_set_user_name', 'frage_stellen_set_user_level', 'frage_stellen_set_user_os', 'frage_stellen_new_frage']);">Frage stellen</div></div>
       </div>
     </div>
     
@@ -147,10 +123,10 @@
 	
 	<div>
 	  <div class="inputtitle">Dein Nutzername:</div>
-	  <input type="text" value="" id="set_username_nutzereinstellungen">
+	  <input type="text" value="" id="nutzereinstellungen_set_user_name">
 	</div>
 	
-	<div><div class="button important">ändern</div></div>
+	<div><div class="button important" onclick="api_request(['nutzereinstellungen_set_user_name']);">ändern</div></div>
 
 	<div class="new_section"></div>
 	
@@ -175,10 +151,10 @@
 	<div class="p">Falls du dich auf diesem Gerät mit einem anderen Nutzer anmelden möchtest, trage unten die entsprechende Nutzer ID ein.</div>
 	<div>
 	  <div class="inputtitle">Neue Nutzer ID:</div>
-	  <input type="text" value="">
+	  <input type="text" id="nutzereinstellungen_set_user_session" value="">
 	</div>
 	
-	<div><div class="button">anmelden</div></div>
+	<div><div class="button" onclick="api_request(['nutzereinstellungen_set_user_session']);">anmelden</div></div>
 
       </div>
     </div>
@@ -193,22 +169,22 @@
 	<div class="inputbar">
 	  <div>
 	    <div>Erfahrung:</div>
-	    <select id="set_level_nutzereinstellungen">
-	      <option value="0" id="set_level_0_nutzereinstellungen">Anfänger</option>
-	      <option value="1" id="set_level_1_nutzereinstellungen">Normaler Nutzer</option>
-	      <option value="2" id="set_level_2_nutzereinstellungen">Fortgeschrittener</option>
-	      <option value="3" id="set_level_3_nutzereinstellungen">Profi</option>
+	    <select id="nutzerinformationen_set_user_level">
+	      <option value="0" id="nutzerinformationen_set_user_level_option_0">Anfänger</option>
+	      <option value="1" id="nutzerinformationen_set_user_level_option_1">Normaler Nutzer</option>
+	      <option value="2" id="nutzerinformationen_set_user_level_option_2">Fortgeschrittener</option>
+	      <option value="3" id="nutzerinformationen_set_user_level_option_3">Profi</option>
 	    </select>
 	  </div>
 	  <div>
 	    <div>Betriebsystem:</div>
-	    <input type="text" placeholder="z.B. Linux Mint 21" id="set_os_nutzereinstellungen">
+	    <input type="text" placeholder="z.B. Linux Mint 21" id="nutzerinformationen_set_user_os">
 	  </div>
 	</div>
 
 	<div class="p">Die Angaben sind optional, können aber in manchen Situationen hilfreich sein.</div>
 	
-	<div><div class="button important">ändern</div></div>
+	<div><div class="button important" onclick="api_request(['nutzerinformationen_set_user_level', 'nutzerinformationen_set_user_os']);">ändern</div></div>
       </div>
     </div>
 
@@ -222,18 +198,18 @@
 	<div class="inputbar">
 	  <div>
 	    <div class="inputtitle">Aktives Projekt:</div>
-	    <select id="set_project">
+	    <select id="einstellungen_set_active_project">
 	    </select>
 	  </div>
 	  <div>
 	    <div class="inputtitle">Neues Projekt:</div>
-	    <input type="text" placeholder="Name" id="settings_new_project">
+	    <input type="text" placeholder="Name" id="einstellungen_new_project">
 	  </div>
 	</div>
 
 	<div class="p">Neue Projekte werden sofort auf aktiv gestellt.</div>
 	
-	<div><div class="button important" onclick="api_request('settings');">speichern</div></div>
+	<div><div class="button important" onclick="api_request(['einstellungen_new_project', 'einstellungen_set_active_project']);">speichern</div></div>
 
       </div>
     </div>

@@ -31,19 +31,21 @@ foreach($_LIVEQA_CONFIG["css"] AS $cssevent_data){
     $event_data["data"][$chunk]["value"]=$cssevent_data[1];
 }
 
-$out = query("SELECT id, name, active FROM projects;");
-while ($row = getrows($out)) {
-    $chunk++;
-    $event_data["data"][$chunk]["type"]="project";
-    $event_data["data"][$chunk]["id"]=$row[0];
-    $event_data["data"][$chunk]["name"]=$row[1];
-    $event_data["data"][$chunk]["active"]=$row[2];
+if($_LIVEQA_USER["mod"] == 1){
+    $out = query("SELECT id, name, active FROM projects;");
+    while ($row = getrows($out)) {
+        $chunk++;
+        $event_data["data"][$chunk]["type"]="project";
+        $event_data["data"][$chunk]["id"]=$row[0];
+        $event_data["data"][$chunk]["name"]=$row[1];
+        $event_data["data"][$chunk]["active"]=$row[2];
+    }
 }
 
 $chunk++;
 $event_data["data"][$chunk]["type"]="user";
 if($_LIVEQA_USER !== false){
-    $event_data["data"][$chunk]["username"]=$_LIVEQA_USER["name"];
+    $event_data["data"][$chunk]["name"]=$_LIVEQA_USER["name"];
     $event_data["data"][$chunk]["session"]=$_LIVEQA_USER["session"];
     $event_data["data"][$chunk]["level"]=$_LIVEQA_USER["level"];
     $event_data["data"][$chunk]["os"]=$_LIVEQA_USER["os"];

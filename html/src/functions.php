@@ -8,7 +8,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 function open_mysql_connection(){
     global $mysql_connection;
 
-    $host="localhost";
+    $host="mysql";
     $user="liveqa";
     $password="liveqa";
     $database="liveqa";

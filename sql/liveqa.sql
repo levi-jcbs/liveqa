@@ -1,8 +1,11 @@
-CREATE USER `liveqa`@`localhost` IDENTIFIED BY 'liveqa';
+CREATE USER `liveqa`@`mysql` IDENTIFIED BY 'liveqa';
+
 
 CREATE DATABASE `liveqa`;
 
 GRANT ALL PRIVILEGES ON `liveqa`.* TO `liveqa`@`localhost`;
+
+FLUSH PRIVILEGES;
 
 USE `liveqa`;
 
